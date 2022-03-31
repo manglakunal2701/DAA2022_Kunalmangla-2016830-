@@ -1,3 +1,5 @@
+#include<iostream>
+using namespace std;
 void selectionSort(int a[],int n){
      int pos,min=0,comp=0;
     for(int i=0;i<n-1;i++)
