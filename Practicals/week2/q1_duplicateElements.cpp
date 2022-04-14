@@ -1,33 +1,29 @@
 #include<iostream>
 #include <vector>
 using namespace std;
-void duplicate_no(int arr[],int n){
-    int key,count=1,flag=0;
-    cout<<"Enter the number to find"<<endl;
-    cin>>key;
-    for(int i=0;i<n;i++){
-        if(arr[i]==key){
-             flag=-1;
-            for(int j=i+1;j<n;j++){
-                if(arr[j]==key){
-                    count++;
-                }
-                else{
-                    break;
-                }
-            }
+int duplicate_no(int arr[],int n,int target,int searchFirst){
+    int low = 0;
+    int high=n-1;
+    int res=-1;
+    while(low<=high){
+        int mid= (low+high)/2;
+        if(arr[mid]==target){
+              res = mid;
+             if(searchFirst){
+                 high=mid-1;
+             }
+             else{
+                 low=mid+1;
+             }
         }
-        if(flag==-1){
-                break;
-            }
+        else if(arr[mid]>target){
+            high=mid-1;
+        }
+        else{
+            low=mid+1;
+        }
     }
-    if(flag==0){
-        cout<<"Number not found"<<endl;
-    }
-    else{
-        cout<<"Number is found"<<endl;
-        cout<<"total number of copies are "<<count<<endl;    
-    } 
+    return res;
 }
 int main(){
     int n,key;
@@ -37,5 +33,12 @@ int main(){
     for(int i=0;i<n;i++){
         cin>>arr[i];
     }
-    duplicate_no(arr,n);
+    cout<<"Enter the key to find"<<endl;
+    cin>>key;
+    int first=  duplicate_no(arr,n,key,1);
+    int second=  duplicate_no(arr,n,key,0);
+    cout<<"First occurence is: "<<first<<endl;
+    cout<<"Second occurence is: "<<second<<endl;
+    cout<<"Number of copies of " <<key<<" in logn complexity is: "<<endl;
+    cout<<second-first+1<<endl;
 }
