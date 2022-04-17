@@ -1,6 +1,6 @@
-#include<iostream>
+#include <iostream>
 #include<vector>
-#include<algorithm>
+#include<set>
 using namespace std;
 int main(){
     int n;
@@ -10,11 +10,18 @@ int main(){
     for(auto &it:arr){
         cin>>it;
     }
-    sort(arr.begin(),arr.end());
     int k;
     cout<<"Enter the kth element"<<endl;
     cin>>k;
-    cout<<"kth smallest number is"<<endl;
-    cout<<arr[k-1];
-
+    set<int> res;
+     set<int>::iterator itr;
+    for( int i=0;i<arr.size();i++){
+        res.insert(arr[i]);
+    }
+//    for( itr=res.begin();itr!=res.end();itr++){
+//        cout<<*itr<<" ";
+//    }
+   itr= res.begin();
+   advance(itr,k-1);        //it will point to kth index element;;;;;;;
+   cout<<*itr<<endl;
 }
